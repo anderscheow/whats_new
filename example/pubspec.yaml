@@ -1,0 +1,16 @@
+name: flutter_whats_new_example
+description: Demonstrates how to use the flutter_whats_new plugin.
+author: Anders Cheow <anderscheow94@gmail.com>
+homepage: https://github.com/anderscheow/flutter_whats_new
+
+dependencies:
+  flutter:
+    sdk: flutter
+  whats_new:
+    path: ../
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
