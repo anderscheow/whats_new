@@ -16,19 +16,19 @@ class Feature {
   String description;
   Color descriptionColor;
 
-  Feature({
-    @required this.icon,
-    @required this.iconColor,
-    @required this.title,
-    @required this.titleColor,
-    @required this.description,
-    @required this.descriptionColor
-  }) : assert(icon != null),
-       assert(iconColor != null),
-       assert(title != null),
-       assert(titleColor != null),
-       assert(description != null),
-       assert(descriptionColor != null);
+  Feature(
+      {@required this.icon,
+      @required this.iconColor,
+      @required this.title,
+      @required this.titleColor,
+      @required this.description,
+      @required this.descriptionColor})
+      : assert(icon != null),
+        assert(iconColor != null),
+        assert(title != null),
+        assert(titleColor != null),
+        assert(description != null),
+        assert(descriptionColor != null);
 }
 
 class WhatsNewContent extends StatefulWidget {
@@ -62,18 +62,18 @@ class WhatsNewContent extends StatefulWidget {
     this.transitionDuration = const Duration(milliseconds: 350),
     this.featureItemTransitionDuration = const Duration(milliseconds: 350),
     this.dismissible = false,
-  }) : assert(backgroundColor != null),
-       assert(title != null),
-       assert(titleColor != null),
-       assert(primaryButtonText != null),
-       assert(primaryButtonTextColor != null),
-       assert(primaryButtonBackgroundColor != null),
-       assert(secondaryButtonText != null),
-       assert(secondaryButtonTextColor != null),
-       assert(features != null),
-       assert(hideSecondaryButton != null),
-       assert(transitionDuration != null),
-       assert(dismissible != null);
+  })  : assert(backgroundColor != null),
+        assert(title != null),
+        assert(titleColor != null),
+        assert(primaryButtonText != null),
+        assert(primaryButtonTextColor != null),
+        assert(primaryButtonBackgroundColor != null),
+        assert(secondaryButtonText != null),
+        assert(secondaryButtonTextColor != null),
+        assert(features != null),
+        assert(hideSecondaryButton != null),
+        assert(transitionDuration != null),
+        assert(dismissible != null);
 
   @override
   WhatsNewContentState createState() {
@@ -114,13 +114,12 @@ class WhatsNewContentState extends State<WhatsNewContent> {
       body: new Container(
         color: this.widget.backgroundColor,
         child: new SafeArea(
-          child: new Container(
-            padding: EdgeInsets.all(16.0),
-            child: new Column(
-              children: contents,
-            ),
-          )
-        ),
+            child: new Container(
+          padding: EdgeInsets.all(16.0),
+          child: new Column(
+            children: contents,
+          ),
+        )),
       ),
     );
   }
@@ -128,8 +127,9 @@ class WhatsNewContentState extends State<WhatsNewContent> {
   void iterateAndAddFeatures(int index) async {
     if (index <= this.widget.features.length - 1) {
       Future.delayed(this.widget.featureItemTransitionDuration, () {
-        this._features.insert(this._features.length,
-            this.widget.features[index]);
+        this
+            ._features
+            .insert(this._features.length, this.widget.features[index]);
         this.iterateAndAddFeatures(index + 1);
       });
     }
@@ -142,9 +142,7 @@ class WhatsNewContentState extends State<WhatsNewContent> {
       child: Text(
         this.widget.title,
         style: Theme.of(context).textTheme.display1.copyWith(
-          color: this.widget.titleColor,
-          fontWeight: FontWeight.w600
-        ),
+            color: this.widget.titleColor, fontWeight: FontWeight.w600),
         maxLines: 3,
       ),
     );
@@ -152,27 +150,25 @@ class WhatsNewContentState extends State<WhatsNewContent> {
 
   Widget _featuresLayout(BuildContext context) {
     return new Expanded(
-      flex: 4,
-      child: new Container(
-        margin: EdgeInsets.only(left: 4.0, top: 16.0, right: 4.0, bottom: 16.0),
-        child: new ScrollConfiguration(
-          behavior: DisableGlowScrollBehavior(),
-          child: AnimatedList(
-            key: this._listKey,
-            initialItemCount: this._features.length,
-            itemBuilder: (context, index, animation) {
-              return this._featureLayout(context,
-                  this._features[index],
-                  animation);
-            }
+        flex: 4,
+        child: new Container(
+          margin:
+              EdgeInsets.only(left: 4.0, top: 16.0, right: 4.0, bottom: 16.0),
+          child: new ScrollConfiguration(
+            behavior: DisableGlowScrollBehavior(),
+            child: AnimatedList(
+                key: this._listKey,
+                initialItemCount: this._features.length,
+                itemBuilder: (context, index, animation) {
+                  return this._featureLayout(
+                      context, this._features[index], animation);
+                }),
           ),
-        ),
-      )
-    );
+        ));
   }
 
-  Widget _featureLayout(BuildContext context, Feature feature,
-      Animation<double> animation) {
+  Widget _featureLayout(
+      BuildContext context, Feature feature, Animation<double> animation) {
     return new Container(
       child: SizeTransition(
         sizeFactor: animation,
@@ -188,16 +184,15 @@ class WhatsNewContentState extends State<WhatsNewContent> {
           title: Text(
             feature.title,
             style: Theme.of(context).textTheme.subhead.copyWith(
-              fontWeight: FontWeight.w600,
-              color: feature.titleColor
-            ),
+                fontWeight: FontWeight.w600, color: feature.titleColor),
             maxLines: 2,
           ),
           subtitle: Text(
             feature.description,
-            style: Theme.of(context).textTheme.subhead.copyWith(
-                color: feature.descriptionColor
-            ),
+            style: Theme.of(context)
+                .textTheme
+                .subhead
+                .copyWith(color: feature.descriptionColor),
             maxLines: 5,
           ),
         ),
@@ -207,55 +202,53 @@ class WhatsNewContentState extends State<WhatsNewContent> {
 
   Widget _actionsLayout(BuildContext context) {
     return new Expanded(
-      child: new Container(
-        alignment: Alignment.bottomCenter,
-        child: new Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            new Container(
-              padding: EdgeInsets.only(left: 8.0, top: 4.0,
-                  right: 8.0, bottom: 4.0
-              ),
-              margin: EdgeInsets.only(bottom: 16.0),
-              child: GestureDetector(
-                onTap: () {
-                  this.widget.callback?.onSecondaryButtonClicked();
-                },
-                child: Text(
-                  this.widget.secondaryButtonText,
-                  style: Theme.of(context).textTheme.body1.copyWith(
-                    color: this.widget.secondaryButtonTextColor
-                  ),
-                ),
+        child: new Container(
+      alignment: Alignment.bottomCenter,
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          new Container(
+            padding:
+                EdgeInsets.only(left: 8.0, top: 4.0, right: 8.0, bottom: 4.0),
+            margin: EdgeInsets.only(bottom: 16.0),
+            child: GestureDetector(
+              onTap: () {
+                this.widget.callback?.onSecondaryButtonClicked();
+              },
+              child: Text(
+                this.widget.secondaryButtonText,
+                style: Theme.of(context)
+                    .textTheme
+                    .body1
+                    .copyWith(color: this.widget.secondaryButtonTextColor),
               ),
             ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: RaisedButton(
-                onPressed: () {
-                  this.widget.callback?.onPrimaryButtonClicked();
-                  this.widget.callback?.onWhatsNewDismissed();
-                  Navigator.of(context).pop();
-                },
-                child: Text(
-                  this.widget.primaryButtonText,
-                  style: Theme.of(context).textTheme.subhead.copyWith(
-                    color: this.widget.primaryButtonTextColor
-                  ),
-                ),
-                shape: RoundedRectangleBorder(
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: RaisedButton(
+              onPressed: () {
+                this.widget.callback?.onPrimaryButtonClicked();
+                this.widget.callback?.onWhatsNewDismissed();
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                this.widget.primaryButtonText,
+                style: Theme.of(context)
+                    .textTheme
+                    .subhead
+                    .copyWith(color: this.widget.primaryButtonTextColor),
+              ),
+              shape: RoundedRectangleBorder(
                   side: BorderSide(
-                    color: this.widget.primaryButtonBackgroundColor
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))
-                ),
-                color: this.widget.primaryButtonBackgroundColor,
-                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-              ),
+                      color: this.widget.primaryButtonBackgroundColor),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+              color: this.widget.primaryButtonBackgroundColor,
+              padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
             ),
-          ],
-        ),
-      )
-    );
+          ),
+        ],
+      ),
+    ));
   }
 }
