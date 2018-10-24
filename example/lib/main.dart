@@ -28,6 +28,9 @@ class TestPage extends StatelessWidget implements WhatsNewCallback {
       secondaryButtonTextColor: Colors.red,
       transitionDuration: Duration(milliseconds: 350),
       featureItemTransitionDuration: Duration(milliseconds: 350),
+      hideSecondaryButton: false,
+      dismissible: false,
+      callback: this,
       features: [
         Feature(
           icon: 'assets/access-point.png',
