@@ -1,6 +1,6 @@
 # whats_new
 
-A Flutter plugin for Android and iOS supports cropping images
+Beautiful way to showcase new features of your app.
 
 [![pub package](https://img.shields.io/pub/v/whats_new.svg)](https://pub.dartlang.org/packages/whats_new)
 
@@ -44,4 +44,4 @@ WhatsNew.show(context, WhatsNewContent(
     ));
 ````
 
-Check out the [![example](https://pub.dartlang.org/packages/whats_new#-example-tab-)]
+Check out the [example](https://pub.dartlang.org/packages/whats_new#-example-tab-)
