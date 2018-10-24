@@ -44,4 +44,4 @@ WhatsNew.show(context, WhatsNewContent(
     ));
 ````
 
-Check out the [![example](https://pub.dartlang.org/packages/whats_new#-example-tab-)]
+Check out the [example](https://pub.dartlang.org/packages/whats_new#-example-tab-)
