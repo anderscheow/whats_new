@@ -147,6 +147,7 @@ class WhatsNewContentState extends State<WhatsNewContent> {
             child: new Container(
           padding: EdgeInsets.all(16.0),
           child: new Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: contents,
           ),
         )),
@@ -238,57 +239,56 @@ class WhatsNewContentState extends State<WhatsNewContent> {
   }
 
   Widget _actionsLayout(BuildContext context) {
-    return new Expanded(
-        child: new Container(
+    return new Container(
       alignment: Alignment.bottomCenter,
       child: new Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          new Container(
-            padding:
-                EdgeInsets.only(left: 8.0, top: 4.0, right: 8.0, bottom: 4.0),
-            margin: EdgeInsets.only(bottom: 16.0),
-            child: GestureDetector(
-              onTap: () {
-                this.widget.callback?.onSecondaryButtonClicked();
-              },
-              child: Text(
-                this.widget.secondaryButtonText,
-                style: Theme.of(context).textTheme.body1.copyWith(
-                  color: this.widget.secondaryButtonTextColor,
-                  fontSize: this.widget.secondaryButtonFontSize,
-                  fontWeight: this.widget.secondaryButtonFontWeight
-                ),
-              ),
+    mainAxisSize: MainAxisSize.min,
+    children: <Widget>[
+      new Container(
+        padding:
+            EdgeInsets.only(left: 8.0, top: 4.0, right: 8.0, bottom: 4.0),
+        margin: EdgeInsets.only(bottom: 16.0),
+        child: GestureDetector(
+          onTap: () {
+            this.widget.callback?.onSecondaryButtonClicked();
+          },
+          child: Text(
+            this.widget.secondaryButtonText,
+            style: Theme.of(context).textTheme.body1.copyWith(
+              color: this.widget.secondaryButtonTextColor,
+              fontSize: this.widget.secondaryButtonFontSize,
+              fontWeight: this.widget.secondaryButtonFontWeight
             ),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: RaisedButton(
-              onPressed: () {
-                this.widget.callback?.onPrimaryButtonClicked();
-                this.widget.callback?.onWhatsNewDismissed();
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                this.widget.primaryButtonText,
-                style: Theme.of(context).textTheme.subhead.copyWith(
-                  color: this.widget.primaryButtonTextColor,
-                  fontSize: this.widget.primaryButtonFontSize,
-                  fontWeight: this.widget.primaryButtonFontWeight
-                ),
-              ),
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(
-                      color: this.widget.primaryButtonBackgroundColor),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))
-              ),
-              color: this.widget.primaryButtonBackgroundColor,
-              padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-            ),
-          ),
-        ],
+        ),
       ),
-    ));
+      SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: RaisedButton(
+          onPressed: () {
+            this.widget.callback?.onPrimaryButtonClicked();
+            this.widget.callback?.onWhatsNewDismissed();
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            this.widget.primaryButtonText,
+            style: Theme.of(context).textTheme.subhead.copyWith(
+              color: this.widget.primaryButtonTextColor,
+              fontSize: this.widget.primaryButtonFontSize,
+              fontWeight: this.widget.primaryButtonFontWeight
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+              side: BorderSide(
+                  color: this.widget.primaryButtonBackgroundColor),
+              borderRadius: BorderRadius.all(Radius.circular(10.0))
+          ),
+          color: this.widget.primaryButtonBackgroundColor,
+          padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+        ),
+      ),
+    ],
+      ),
+    );
   }
 }
