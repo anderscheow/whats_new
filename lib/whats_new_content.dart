@@ -9,37 +9,55 @@ abstract class WhatsNewCallback {
 }
 
 class Feature {
-  String icon;
-  Color iconColor;
-  String title;
-  Color titleColor;
-  String description;
-  Color descriptionColor;
+  final String icon;
+  final Color iconColor;
+  final String title;
+  final Color titleColor;
+  final double titleFontSize;
+  final FontWeight titleFontWeight;
+  final String description;
+  final Color descriptionColor;
+  final double descriptionFontSize;
+  final FontWeight descriptionFontWeight;
 
-  Feature(
-      {@required this.icon,
-      @required this.iconColor,
-      @required this.title,
-      @required this.titleColor,
-      @required this.description,
-      @required this.descriptionColor})
-      : assert(icon != null),
-        assert(iconColor != null),
-        assert(title != null),
-        assert(titleColor != null),
-        assert(description != null),
-        assert(descriptionColor != null);
+  Feature({
+    @required this.icon,
+    @required this.iconColor,
+    @required this.title,
+    @required this.titleColor,
+    @required this.description,
+    @required this.descriptionColor,
+    this.titleFontSize = 16.0,
+    this.titleFontWeight = FontWeight.w600,
+    this.descriptionFontSize = 16.0,
+    this.descriptionFontWeight = FontWeight.normal,
+  }) : assert(icon != null),
+       assert(iconColor != null),
+       assert(title != null),
+       assert(titleColor != null),
+       assert(titleFontSize != null),
+       assert(titleFontWeight != null),
+       assert(description != null),
+       assert(descriptionColor != null),
+       assert(descriptionFontSize != null),
+       assert(descriptionFontWeight != null);
 }
 
 class WhatsNewContent extends StatefulWidget {
   final Color backgroundColor;
   final String title;
   final Color titleColor;
+  final double titleFontSize;
+  final FontWeight titleFontWeight;
   final String primaryButtonText;
   final Color primaryButtonTextColor;
   final Color primaryButtonBackgroundColor;
+  final double primaryButtonFontSize;
+  final FontWeight primaryButtonFontWeight;
   final String secondaryButtonText;
   final Color secondaryButtonTextColor;
+  final double secondaryButtonFontSize;
+  final FontWeight secondaryButtonFontWeight;
   final bool hideSecondaryButton;
   final WhatsNewCallback callback;
   final Duration transitionDuration;
@@ -57,6 +75,12 @@ class WhatsNewContent extends StatefulWidget {
     @required this.secondaryButtonText,
     @required this.secondaryButtonTextColor,
     @required this.features,
+    this.titleFontSize = 24.0,
+    this.titleFontWeight = FontWeight.w600,
+    this.primaryButtonFontSize = 18.0,
+    this.primaryButtonFontWeight = FontWeight.normal,
+    this.secondaryButtonFontSize = 16.0,
+    this.secondaryButtonFontWeight = FontWeight.normal,
     this.hideSecondaryButton = false,
     this.callback,
     this.transitionDuration = const Duration(milliseconds: 350),
@@ -65,11 +89,17 @@ class WhatsNewContent extends StatefulWidget {
   })  : assert(backgroundColor != null),
         assert(title != null),
         assert(titleColor != null),
+        assert(titleFontSize != null),
+        assert(titleFontWeight != null),
         assert(primaryButtonText != null),
         assert(primaryButtonTextColor != null),
         assert(primaryButtonBackgroundColor != null),
+        assert(primaryButtonFontSize != null),
+        assert(primaryButtonFontWeight != null),
         assert(secondaryButtonText != null),
         assert(secondaryButtonTextColor != null),
+        assert(secondaryButtonFontSize != null),
+        assert(secondaryButtonFontWeight != null),
         assert(features != null),
         assert(hideSecondaryButton != null),
         assert(transitionDuration != null),
@@ -142,7 +172,10 @@ class WhatsNewContentState extends State<WhatsNewContent> {
       child: Text(
         this.widget.title,
         style: Theme.of(context).textTheme.display1.copyWith(
-            color: this.widget.titleColor, fontWeight: FontWeight.w600),
+          color: this.widget.titleColor,
+          fontWeight: this.widget.titleFontWeight,
+          fontSize: this.widget.titleFontSize,
+        ),
         maxLines: 3,
       ),
     );
@@ -184,15 +217,19 @@ class WhatsNewContentState extends State<WhatsNewContent> {
           title: Text(
             feature.title,
             style: Theme.of(context).textTheme.subhead.copyWith(
-                fontWeight: FontWeight.w600, color: feature.titleColor),
+              color: feature.titleColor,
+              fontSize: feature.titleFontSize,
+              fontWeight: feature.titleFontWeight,
+            ),
             maxLines: 2,
           ),
           subtitle: Text(
             feature.description,
-            style: Theme.of(context)
-                .textTheme
-                .subhead
-                .copyWith(color: feature.descriptionColor),
+            style: Theme.of(context).textTheme.subhead.copyWith(
+              color: feature.descriptionColor,
+              fontSize: feature.descriptionFontSize,
+              fontWeight: feature.descriptionFontWeight,
+            ),
             maxLines: 5,
           ),
         ),
@@ -217,10 +254,11 @@ class WhatsNewContentState extends State<WhatsNewContent> {
               },
               child: Text(
                 this.widget.secondaryButtonText,
-                style: Theme.of(context)
-                    .textTheme
-                    .body1
-                    .copyWith(color: this.widget.secondaryButtonTextColor),
+                style: Theme.of(context).textTheme.body1.copyWith(
+                  color: this.widget.secondaryButtonTextColor,
+                  fontSize: this.widget.secondaryButtonFontSize,
+                  fontWeight: this.widget.secondaryButtonFontWeight
+                ),
               ),
             ),
           ),
@@ -234,15 +272,17 @@ class WhatsNewContentState extends State<WhatsNewContent> {
               },
               child: Text(
                 this.widget.primaryButtonText,
-                style: Theme.of(context)
-                    .textTheme
-                    .subhead
-                    .copyWith(color: this.widget.primaryButtonTextColor),
+                style: Theme.of(context).textTheme.subhead.copyWith(
+                  color: this.widget.primaryButtonTextColor,
+                  fontSize: this.widget.primaryButtonFontSize,
+                  fontWeight: this.widget.primaryButtonFontWeight
+                ),
               ),
               shape: RoundedRectangleBorder(
                   side: BorderSide(
                       color: this.widget.primaryButtonBackgroundColor),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  borderRadius: BorderRadius.all(Radius.circular(10.0))
+              ),
               color: this.widget.primaryButtonBackgroundColor,
               padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
             ),
