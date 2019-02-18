@@ -8,7 +8,7 @@ class WhatsNew extends ModalRoute<void> {
 
   final WhatsNewContent content;
 
-  WhatsNew(this.content);
+  WhatsNew(this.content) : assert(content != null);
 
   @override
   Duration get transitionDuration => this.content.transitionDuration;
